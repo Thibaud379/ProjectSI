@@ -8,8 +8,8 @@ def setup():
     bitLength = 1000 / frequency / 4096
     servos   = []
     servo[0] = Servo(0, 180, 0.5, 2.5)
-    servo[1] = Servo(1, 270, 0.5, 2.5)
-    servo[2] = Servo(2, 270, 0.5, 2.5)
+    servo[1] = Servo(1, 180, 0.5, 2)
+    servo[2] = Servo(2, 180, 0.5, 2)
     servo[3] = Servo(3, 180, 0.7, 2.3)
 
 def rotateServos(angles, debug = False):
