@@ -1,8 +1,12 @@
 from Vision import getAngles
 from ServoHandler import rotateServos
 from time import sleep
-pos =[0,0.27,0]
+from Utils import getAngles
+debug = input("Debug ?(True/False):")
+repos =[0,0.2,0.3]
+rotateServos(getAngles(repos),debug)
+pos = repos
 while True:
-    (angles,pos) = Vision.getAngles(pos, True)
-    rotateServos(angles, True)
+    newPos = Vision.getPos(pos, debug)
+    rotateServos(getAngles(pos), debug)
     sleep(1)

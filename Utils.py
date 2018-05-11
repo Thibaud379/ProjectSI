@@ -1,6 +1,11 @@
 import cv2
 import numpy
 from math import sqrt
+import tinyik
+
+
+arm = tinyik.Actuator(['y', [0., 0., 0.], 'x', [0., 1., 0.], 'x',[0.,1.,0.]])
+arm.ee = [1,1,1]
 
 def getCircles(image, blur, p1, p2):
        imageB = cv2.medianBlur(image,blur)
@@ -24,6 +29,16 @@ def getAvg(a):
        for v in a:
               t+=v
        return (t/len(a))
+
+def getAngles(pos, debug = False):
+       arm.ee = pos
+       if debug:
+              print("---pos---")
+              print(arm.ee)
+              print("---angles---")
+              print(arm.angles)
+       return arm.angles
+       
 
 def createScaler(inMin, inMax, outMin, outMax):
        def scaler(value):

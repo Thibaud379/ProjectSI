@@ -1,6 +1,5 @@
 import utils
 from picamera import PiCamera
-import tinyik
 import numpy as np
 from math import tan
 from math import radians
@@ -13,9 +12,9 @@ heigthA = radians(48.8)
 camera = PiCamera()
 camera.resolution = (512,512)
 camera.start_preview()
-arm = tinyik.Actuator(['y', [0., 0., 0.], 'x', [0., 1., 0.], 'x',[0.,1.,0.]])
 
-def getAngles(pos, debug=False):
+
+def getPos(pos, debug=False):
         image = np.empty((512 * 512 * 3), dtype=np.uint8)
         camera.capture(image, 'bgr')
         image = image.reshape((512,512,3))
@@ -38,7 +37,6 @@ def getAngles(pos, debug=False):
             deltaX = x - size/2
             deltaZ = z - size/2
 	newPos = [pos[0]+deltaX, pos[1], pos[2]+deltaZ]
-        arm.ee = newPos
         if debug:
             print("---Circle Array---")
             pprint(circles)
@@ -55,6 +53,4 @@ def getAngles(pos, debug=False):
             print(x,z)
             print("---deltaX & deltaZ---")
             print(deltaX, deltaZ)
-            print("---Angle Array---")
-            pprint(arm.angles)
-        return (arm.angles, newPos)
+        return newPos
