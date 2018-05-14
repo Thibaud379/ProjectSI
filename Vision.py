@@ -26,7 +26,7 @@ def getPos(pos, debug=False):
     camera.capture(image, 'bgr')
     image = image.reshape((512,512,3))
     #Get the possible circles in the image
-    circles = utils.getCircles(image, blur, param1, param2)
+    circles = utils.getCircles(image)
 
     #If none were found
     if circles is None:
